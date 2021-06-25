@@ -1,6 +1,5 @@
 /*
 Co-Investigators
-Manages
 Supervise
 */
 create table Professors(
@@ -42,6 +41,30 @@ create table WorksIn(
 	TimePercentage int,
 	foreign key(EmployeeSSN) references Professors(SSN),
 	foreign key(DepartmentNumber) references Departments(DeptNumber)
+);
+create table Manages(
+	ProjNumber int,
+	ProfessorSSN varchar(10),
+	foreign key(ProjNumber) references Projects(ProjectNumber),
+	foreign key(ProfessorSSN) references Professors(SSN)
+);
+create table Chairmen(
+	ProjNumber int,
+	ProfessorSSN varchar(10),
+	foreign key(ProjNumber) references Projects(ProjectNumber),
+	foreign key(ProfessorSSN) references Professors(SSN)
+);
+create table MajorDepartments(
+	StudentSSN varchar(10),
+	DepartmentNumber int,
+	foreign key(StudentSSN) references Students(SSN),
+	foreign key(DepartmentNumber) references Departments(DeptNumber)
+);
+create table StudentAdvisors(
+	StudentSSN varchar(10),
+	AdvisorSSN varchar(10),
+	foreign key(StudentSSN) references Students(SSN),
+	foreign key(StudentSSN) references Students(SSN)
 );
 select * from WorksIn
 /*
