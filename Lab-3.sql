@@ -125,45 +125,53 @@ insert into Chairman values(2, '505025235');
 insert into Chairman values(3, '12602672');
 
 -- Insert into Major Departments
-insert into MajorDepartments values(
-create table MajorDepartments(
-	StudentSSN varchar(10),
-	DepartmentNumber int,
-	foreign key(StudentSSN) references Students(SSN),
-	foreign key(DepartmentNumber) references Departments(DeptNumber)
-);
-create table StudentAdvisors(
-	StudentSSN varchar(10),
-	AdvisorSSN varchar(10),
-	foreign key(StudentSSN) references Students(SSN),
-	foreign key(StudentSSN) references Students(SSN)
-);
-create table ResearchAssistants(
-	StudentSSN varchar(10),
-	ProjNumber int,
-	foreign key(StudentSSN) references Students(SSN),
-	foreign key(ProjNumber) references Projects(ProjectNumber)
-);
-create table Supervises(
-	StudentSSN varchar(10),
-	ProjNumber int,
-	foreign key(StudentSSN) references Students(SSN),
-	foreign key(ProjNumber) references Projects(ProjectNumber)
-);
-create table CoInvestigators(
-	ProfessorSSN varchar(10),
-	ProjNumber int,
-	foreign key(ProfessorSSN) references Professors(SSN),
-	foreign key(ProjNumber) references Projects(ProjectNumber)
-);
+insert into MajorDepartments values('12345678', 1);
+insert into MajorDepartments values('23456789', 3);
+insert into MajorDepartments values('23456781', 2);
+insert into MajorDepartments values('62346723', 2);
+insert into MajorDepartments values('979267592', 4);
+insert into MajorDepartments values('236714723', 3);
+insert into MajorDepartments values('834357372', 1);
 
-select * from Projects
-select * from Students s where s.DOB >= '01/01/2001';
-select * from WorksIn
+-- Insert into Student Advisors
+insert into StudentAdvisors values('12345678', '23456789');
+insert into StudentAdvisors values('23456789', '23456781');
+insert into StudentAdvisors values('23456781', '62346723');
+insert into StudentAdvisors values('62346723', '979267592');
+insert into StudentAdvisors values('979267592', '236714723');
+insert into StudentAdvisors values('236714723', '834357372');
+insert into StudentAdvisors values('834357372', '12345678');
+
+-- Insert into Research Assistants
+insert into ResearchAssistants values('12345678', 1);
+insert into ResearchAssistants values('23456789', 3);
+insert into ResearchAssistants values('23456781', 2);
+insert into ResearchAssistants values('62346723', 3);
+insert into ResearchAssistants values('979267592', 2);
+insert into ResearchAssistants values('236714723', 1);
+insert into ResearchAssistants values('834357372', 3);
+
+-- Insert into Supervises
+insert into Supervises values('12345678', 1);
+insert into Supervises values('23456781', 2);
+insert into Supervises values('979267592', 3);
+
+-- Insert into Co-Investigators
+insert into CoInvestigators values('505025235', 1);
+insert into CoInvestigators values('510526736', 2);
+insert into CoInvestigators values('12602672', 3);
+
+--The total budget for all projects
+select sum(budget) from Projects;
+
+--Professors who manage projects
+select ProfName from Professors p where exists(select * from Manages where p.SSN = ProfessorSSN);
+
+--Professors who do not manage projects
+select ProfName from Professors p where not exists(select * from Manages where p.SSN = ProfessorSSN);
+
+
 /*
-What is the total budget for all projects?
-Who are the professors who manage projects?
-Who are the professors who don’t manage projects?
 Which graduate student work on3 or more projects?
 What are the professors that work in each department?
 */
