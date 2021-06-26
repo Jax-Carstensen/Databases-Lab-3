@@ -1,7 +1,3 @@
-/*
-Co-Investigators
-Supervise
-*/
 create table Professors(
 	SSN varchar(10),
 	Speciality varchar(20),
@@ -169,6 +165,9 @@ select ProfName from Professors p where exists(select * from Manages where p.SSN
 
 --Professors who do not manage projects
 select ProfName from Professors p where not exists(select * from Manages where p.SSN = ProfessorSSN);
+
+--All graduate students who work on 3 or more projects
+select s.StudentName from Students s inner join ResearchAssistants r on s.SSN = r.StudentSSN group by s.StudentName having count(*) >= 3;
 
 
 /*
