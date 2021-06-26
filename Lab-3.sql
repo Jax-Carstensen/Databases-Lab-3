@@ -71,14 +71,93 @@ create table ResearchAssistants(
 	ProjNumber int,
 	foreign key(StudentSSN) references Students(SSN),
 	foreign key(ProjNumber) references Projects(ProjectNumber)
-)
-insert into Students values('12345678', 'Computer Science', '02/05/2001', 'John Mayor');
-insert into Students values('23456789', 'Math', '03/07/2002', 'Earl Diggins');
-insert into Students values('23456781', 'Computer Science', '02/05/2001', 'Nathan Digby');
-insert into Students values('62346723', 'Science', '10/23/1996', 'Madison Smith');
-insert into Students values('979267592', 'Math', '01/27/2004', 'Daniel Digby');
-insert into Students values('236714723', 'Science', '07/16/1999', 'Ethan Nelson');
-insert into Students values('834357372', 'Computer Science', '05/30/2000', 'Jacob Johnson');
+);
+create table Supervises(
+	StudentSSN varchar(10),
+	ProjNumber int,
+	foreign key(StudentSSN) references Students(SSN),
+	foreign key(ProjNumber) references Projects(ProjectNumber)
+);
+create table CoInvestigators(
+	ProfessorSSN varchar(10),
+	ProjNumber int,
+	foreign key(ProfessorSSN) references Professors(SSN),
+	foreign key(ProjNumber) references Projects(ProjectNumber)
+);
+-- Insert the students
+insert into Students values('12345678', 'Ph.D.', '02/05/2001', 'John Mayor');
+insert into Students values('23456789', 'M.S.', '03/07/2002', 'Earl Diggins');
+insert into Students values('23456781', 'Ph.D.', '02/05/2001', 'Nathan Digby');
+insert into Students values('62346723', 'Ph.D.', '10/23/1996', 'Madison Smith');
+insert into Students values('979267592', 'Ph.D.', '01/27/2004', 'Daniel Digby');
+insert into Students values('236714723', 'M.S.', '07/16/1999', 'Ethan Nelson');
+insert into Students values('834357372', 'M.S.', '05/30/2000', 'Jacob Johnson');
+
+-- Insert the professors
+insert into Professors values('505025235', 'Computer Science', 1, 'Kaleb Melbourne', '05/24/1985');
+insert into Professors values('510526736', 'Math', 2, 'Gage Smith', '11/05/1967');
+insert into Professors values('12602672', 'Computer Science', 2, 'Megan Fox', '06/12/1988');
+
+-- Insert the projects
+insert into Projects values(1, 'Coca Cola', '01/01/2021', '12/31/2021', 50000);
+insert into Projects values(2, 'Pepsi', '02/15/2021', '02/15/2022', 100000);
+insert into Projects values(3, 'Walmart', '08/01/2020', '08/01/2021', 25000);
+
+-- Insert the departments
+insert into Departments values(1, 'f-21', 'Computer Science');
+insert into Departments values(2, 'b-12', 'Math');
+insert into Departments values(3, 'f-20', 'English');
+insert into Departments values(4, 'f-19', 'Art');
+
+-- Insert WorksIn
+insert into WorksIn values('505025235', 1, 25);
+insert into WorksIn values('510526736', 2, 25);
+insert into WorksIn values('12602672', 4, 25);
+
+-- Insert into Manages
+insert into Manages values(1, '505025235');
+insert into Manages values(2, '12602672');
+insert into Manages values(3, '510526736');
+
+-- Insert into Chairmen
+insert into Chairman values(1, '510526736');
+insert into Chairman values(2, '505025235');
+insert into Chairman values(3, '12602672');
+
+-- Insert into Major Departments
+insert into MajorDepartments values(
+create table MajorDepartments(
+	StudentSSN varchar(10),
+	DepartmentNumber int,
+	foreign key(StudentSSN) references Students(SSN),
+	foreign key(DepartmentNumber) references Departments(DeptNumber)
+);
+create table StudentAdvisors(
+	StudentSSN varchar(10),
+	AdvisorSSN varchar(10),
+	foreign key(StudentSSN) references Students(SSN),
+	foreign key(StudentSSN) references Students(SSN)
+);
+create table ResearchAssistants(
+	StudentSSN varchar(10),
+	ProjNumber int,
+	foreign key(StudentSSN) references Students(SSN),
+	foreign key(ProjNumber) references Projects(ProjectNumber)
+);
+create table Supervises(
+	StudentSSN varchar(10),
+	ProjNumber int,
+	foreign key(StudentSSN) references Students(SSN),
+	foreign key(ProjNumber) references Projects(ProjectNumber)
+);
+create table CoInvestigators(
+	ProfessorSSN varchar(10),
+	ProjNumber int,
+	foreign key(ProfessorSSN) references Professors(SSN),
+	foreign key(ProjNumber) references Projects(ProjectNumber)
+);
+
+select * from Projects
 select * from Students s where s.DOB >= '01/01/2001';
 select * from WorksIn
 /*
