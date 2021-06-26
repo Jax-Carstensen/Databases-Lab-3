@@ -141,6 +141,8 @@ insert into StudentAdvisors values('834357372', '12345678');
 -- Insert into Research Assistants
 insert into ResearchAssistants values('12345678', 1);
 insert into ResearchAssistants values('23456789', 3);
+insert into ResearchAssistants values('23456789', 2);
+insert into ResearchAssistants values('23456789', 1);
 insert into ResearchAssistants values('23456781', 2);
 insert into ResearchAssistants values('62346723', 3);
 insert into ResearchAssistants values('979267592', 2);
@@ -169,8 +171,5 @@ select ProfName from Professors p where not exists(select * from Manages where p
 --All graduate students who work on 3 or more projects
 select s.StudentName from Students s inner join ResearchAssistants r on s.SSN = r.StudentSSN group by s.StudentName having count(*) >= 3;
 
-
-/*
-Which graduate student work on3 or more projects?
-What are the professors that work in each department?
-*/
+--All professors who work in each department
+select p.profName, w.DepartmentNumber from Professors p inner join WorksIn w on p.SSN = w.EmployeeSSN;
